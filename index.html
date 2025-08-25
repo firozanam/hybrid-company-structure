@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webbly Media - Hybrid Company Structure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1e293b;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 2rem 1.5rem;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        .presentation-container {
+            flex: 1;
+            margin-left: 280px;
+            background: white;
+            min-height: 100vh;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .slide {
+            padding: 3rem 4rem;
+            min-height: 100vh;
+            display: none;
+            position: relative;
+            background: white;
+        }
+
+        .slide.active {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slide h1 {
+            font-size: 3rem;
+            color: #1e293b;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .slide h2 {
+            font-size: 2.25rem;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .slide h3 {
+            font-size: 1.5rem;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: #475569;
+        }
+        
+        .slide ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            text-align: center;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #64748b;
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+        
+        .structure-visual {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .structure-box {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 1;
+            min-width: 280px;
+            max-width: 380px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .structure-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+        
+        .structure-box h4 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .benefit-card {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white !important;
+            padding: 1.75rem;
+            border-radius: 0.875rem;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .benefit-card h3 {
+            color: white !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card p {
+            color: rgba(255, 255, 255, 0.95) !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            line-height: 1.6;
+        }
+
+        .benefit-card ul {
+            color: rgba(255, 255, 255, 0.95) !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .benefit-card li {
+            color: rgba(255, 255, 255, 0.9) !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .benefit-card strong {
+            color: white !important;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .benefit-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .benefit-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .key-metrics {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .metric-item {
+            text-align: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+
+        .metric-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .metric-value {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            display: block;
+            font-size: 0.875rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .dual-reporting-system {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .reporting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .reporting-card {
+            color: white !important;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .reporting-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .reporting-card h4 {
+            color: white !important;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .reporting-card p {
+            color: rgba(255, 255, 255, 0.95) !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .reporting-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.95) !important;
+        }
+
+        .reporting-card li {
+            color: rgba(255, 255, 255, 0.9) !important;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .reporting-card li:last-child {
+            border-bottom: none;
+        }
+
+        .reporting-card li::before {
+            content: "✓ ";
+            font-weight: bold;
+            margin-right: 0.5rem;
+            color: white !important;
+        }
+
+        .project-benefits {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .project-benefits h5 {
+            color: white !important;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-benefits .benefit-tag {
+            display: inline-block;
+            margin: 0.25rem 0.5rem 0.25rem 0;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .benefit-tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: flex-start;
+        }
+
+        .benefit-tags-container .benefit-tag {
+            margin: 0;
+        }
+
+        .project-lifecycle {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .lifecycle-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .lifecycle-step {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .lifecycle-step:hover {
+            transform: translateY(-2px);
+        }
+
+        .step-number {
+            background: var(--primary-blue);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--primary-blue);
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .step-content p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .step-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .step-benefits .benefit-tag {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .success-factors {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .factor-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .factor-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .factor-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .factor-item h4 {
+            color: var(--primary-blue);
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .factor-item p {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .implementation-timeline {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .timeline-item {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .timeline-marker {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .timeline-content h4 {
+            color: var(--primary-blue);
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .timeline-content p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .timeline-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .timeline-benefits .benefit-tag {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .specialist-box {
+            font-size: 0.9em !important;
+        }
+
+        .current-strengths {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .strength-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .strength-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .strength-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .strength-item h4 {
+            color: var(--success-green);
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .strength-item p {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Matrix Visual Enhancements */
+        .matrix-visual {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .matrix-card {
+            color: white !important;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .matrix-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .matrix-card h4 {
+            color: white !important;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .matrix-card p {
+            color: rgba(255, 255, 255, 0.95) !important;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .matrix-card strong {
+            color: white !important;
+        }
+
+        .matrix-card ul {
+            color: rgba(255, 255, 255, 0.95) !important;
+        }
+
+        .matrix-card li {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+
+        /* Hierarchy Structure Enhancements */
+        .hierarchy-structure {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .hierarchy-level {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hierarchy-box {
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 150px;
+            font-size: 0.95rem;
+        }
+
+        .hierarchy-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Specific level styling to match the image */
+        .admin-level {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            font-size: 1.1rem;
+            padding: 1.25rem 2rem;
+        }
+
+        .management-level {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            font-size: 1.05rem;
+            padding: 1.125rem 1.75rem;
+        }
+
+        .systems-dept {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+
+        .marketing-dept {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .content-dept {
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+        }
+
+        .specialist-box {
+            background: linear-gradient(135deg, #10b981, #059669);
+            font-size: 0.9rem;
+            min-width: 140px;
+        }
+
+        .specialists-level {
+            gap: 0.75rem;
+        }
+
+        .specialists-level .hierarchy-box {
+            flex: 1;
+            max-width: 160px;
+        }
+
+        /* Company Structure Image Styling */
+        .company-structure-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .company-structure-image {
+            max-width: 100%;
+            max-height: 60vh;
+            width: auto;
+            height: auto;
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .company-structure-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Title Slide Benefits Section */
+        .hybrid-benefits {
+            margin-top: 2.5rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .benefits-grid-title {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .benefit-item-title {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .benefit-item-title:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .benefit-item-title h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .benefit-item-title p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Enhanced Visual Hierarchy */
+        .slide h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-blue);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Improved Accessibility and Contrast */
+        .benefit-card h3 {
+            color: white !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+
+        /* Animation Enhancements */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .benefit-card, .matrix-card, .reporting-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .benefit-card:nth-child(2) { animation-delay: 0.1s; }
+        .benefit-card:nth-child(3) { animation-delay: 0.2s; }
+        .benefit-card:nth-child(4) { animation-delay: 0.3s; }
+
+        /* Accessibility Enhancements */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            .benefit-card, .matrix-card, .reporting-card {
+                border: 2px solid white;
+            }
+
+            .nav-btn {
+                border: 2px solid rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        /* Focus Indicators for Better Accessibility */
+        .nav-control-btn:focus,
+        .benefit-card:focus,
+        .matrix-card:focus {
+            outline: 3px solid #60a5fa;
+            outline-offset: 2px;
+        }
+
+        /* Screen Reader Only Content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Color Blind Friendly Patterns */
+        .benefit-tag::before {
+            content: "● ";
+            font-weight: bold;
+        }
+
+        /* Improved Text Contrast */
+        .slide p, .slide li {
+            color: #374151; /* Darker for better contrast */
+        }
+
+        .subtitle {
+            color: #4b5563; /* Improved contrast */
+        }
+        
+        /* Enhanced Color Palette System */
+        :root {
+            /* Primary Brand Colors */
+            --primary-blue: #3b82f6;
+            --primary-blue-light: #60a5fa;
+            --primary-blue-dark: #1d4ed8;
+
+            /* Semantic Colors */
+            --success-green: #10b981;
+            --success-green-light: #34d399;
+            --success-green-dark: #059669;
+
+            --warning-orange: #f59e0b;
+            --warning-orange-light: #fbbf24;
+            --warning-orange-dark: #d97706;
+
+            --danger-red: #ef4444;
+            --danger-red-light: #f87171;
+            --danger-red-dark: #dc2626;
+
+            --info-purple: #8b5cf6;
+            --info-purple-light: #a78bfa;
+            --info-purple-dark: #7c3aed;
+
+            --neutral-teal: #14b8a6;
+            --neutral-teal-light: #5eead4;
+            --neutral-teal-dark: #0d9488;
+
+            /* Navigation Specific Colors */
+            --nav-title: var(--primary-blue);
+            --nav-structure: var(--success-green);
+            --nav-benefits: var(--info-purple);
+            --nav-model: var(--neutral-teal);
+            --nav-examples: var(--warning-orange);
+            --nav-implementation: var(--danger-red);
+            --nav-challenges: var(--warning-orange-dark);
+            --nav-nextsteps: var(--primary-blue-dark);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-nav {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .nav-btn {
+            background: transparent;
+            color: #cbd5e1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.875rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        /* Individual tab color coding */
+        .nav-btn:nth-child(1):hover, .nav-btn:nth-child(1).active {
+            border-color: var(--nav-title);
+            color: var(--nav-title);
+        }
+        .nav-btn:nth-child(1)::before { background: var(--nav-title); }
+        .nav-btn:nth-child(1).active::before { opacity: 1; }
+
+        .nav-btn:nth-child(2):hover, .nav-btn:nth-child(2).active {
+            border-color: var(--nav-structure);
+            color: var(--nav-structure);
+        }
+        .nav-btn:nth-child(2)::before { background: var(--nav-structure); }
+        .nav-btn:nth-child(2).active::before { opacity: 1; }
+
+        .nav-btn:nth-child(3):hover, .nav-btn:nth-child(3).active {
+            border-color: var(--nav-benefits);
+            color: var(--nav-benefits);
+        }
+        .nav-btn:nth-child(3)::before { background: var(--nav-benefits); }
+        .nav-btn:nth-child(3).active::before { opacity: 1; }
+
+        .nav-btn:nth-child(4):hover, .nav-btn:nth-child(4).active {
+            border-color: var(--nav-model);
+            color: var(--nav-model);
+        }
+        .nav-btn:nth-child(4)::before { background: var(--nav-model); }
+        .nav-btn:nth-child(4).active::before { opacity: 1; }
+
+        .nav-btn:nth-child(5):hover, .nav-btn:nth-child(5).active {
+            border-color: var(--nav-examples);
+            color: var(--nav-examples);
+        }
+        .nav-btn:nth-child(5)::before { background: var(--nav-examples); }
+        .nav-btn:nth-child(5).active::before { opacity: 1; }
+
+        .nav-btn:nth-child(6):hover, .nav-btn:nth-child(6).active {
+            border-color: var(--nav-implementation);
+            color: var(--nav-implementation);
+        }
+        .nav-btn:nth-child(6)::before { background: var(--nav-implementation); }
+        .nav-btn:nth-child(6).active::before { opacity: 1; }
+
+        .nav-btn:nth-child(7):hover, .nav-btn:nth-child(7).active {
+            border-color: var(--nav-challenges);
+            color: var(--nav-challenges);
+        }
+        .nav-btn:nth-child(7)::before { background: var(--nav-challenges); }
+        .nav-btn:nth-child(7).active::before { opacity: 1; }
+
+        .nav-btn:nth-child(8):hover, .nav-btn:nth-child(8).active {
+            border-color: var(--nav-nextsteps);
+            color: var(--nav-nextsteps);
+        }
+        .nav-btn:nth-child(8)::before { background: var(--nav-nextsteps); }
+        .nav-btn:nth-child(8).active::before { opacity: 1; }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(4px);
+        }
+
+        .nav-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transform: translateX(4px);
+        }
+
+        .nav-btn-number {
+            background: rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.active .nav-btn-number {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Navigation Controls */
+        .nav-controls {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .nav-control-btn {
+            flex: 1;
+            background: #475569;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .nav-control-btn:hover {
+            background: #3b82f6;
+        }
+
+        .nav-control-btn:disabled {
+            background: #374151;
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+        
+        .slide-number {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: #f1f5f9;
+            color: #64748b;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #3b82f6;
+            border: 1px solid #e0f2fe;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
+            }
+
+            .presentation-container {
+                margin-left: 240px;
+            }
+
+            .presentation-navbar {
+                left: 240px;
+            }
+
+            .slide {
+                padding: 2rem 3rem 3rem 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1rem;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 0.5rem;
+            }
+
+            .nav-btn {
+                white-space: nowrap;
+                min-width: 120px;
+            }
+
+            .nav-controls {
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+
+            .presentation-container {
+                margin-left: 0;
+                margin-top: 50px;
+            }
+
+            .presentation-navbar {
+                left: 0;
+                top: 0;
+                padding: 0.75rem 1rem;
+                font-size: 0.8rem;
+                min-height: 50px;
+            }
+
+            .slide {
+                padding: 1.5rem;
+                min-height: auto;
+            }
+
+            .slide h1 {
+                font-size: 2rem;
+            }
+
+            .slide h2 {
+                font-size: 1.75rem;
+            }
+        }
+        
+        .team-structure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .dept-level {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        
+        .dept-box {
+            background: #3b82f6;
+            color: white;
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            min-width: 140px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .matrix-visual {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .matrix-card {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Navbar Styles */
+        .presentation-navbar {
+            position: fixed;
+            top: 0;
+            left: 280px;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            z-index: 1001;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Cross-browser compatibility */
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .presentation-navbar .designer-name {
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .presentation-navbar .company-name {
+            font-weight: 600;
+            color: #fbbf24;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Adjust main content to account for navbar */
+        .presentation-container {
+            margin-top: 60px;
+        }
+
+        /* Remove bottom padding from slides */
+        .slide {
+            padding-bottom: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">Webbly Media</div>
+            <div class="sidebar-subtitle">Hybrid Company Structure Presentation</div>
+        </div>
+
+        <div class="sidebar-nav">
+            <button class="nav-btn active" onclick="goToSlide(0)" aria-label="Go to slide 1: Title slide">
+                <span class="nav-btn-number">1</span>
+                <span>Title</span>
+                <span class="sr-only">- Introduction and overview</span>
+            </button>
+            <button class="nav-btn" onclick="goToSlide(1)" aria-label="Go to slide 2: Current Structure">
+                <span class="nav-btn-number">2</span>
+                <span>Current Structure</span>
+                <span class="sr-only">- Traditional hierarchy overview</span>
+            </button>
+            <button class="nav-btn" onclick="goToSlide(2)" aria-label="Go to slide 3: Why Hybrid?">
+                <span class="nav-btn-number">3</span>
+                <span>Why Hybrid?</span>
+                <span class="sr-only">- Benefits and rationale</span>
+            </button>
+            <button class="nav-btn" onclick="goToSlide(3)" aria-label="Go to slide 4: Hybrid Model">
+                <span class="nav-btn-number">4</span>
+                <span>Hybrid Model</span>
+                <span class="sr-only">- Dual reporting system</span>
+            </button>
+            <button class="nav-btn" onclick="goToSlide(4)" aria-label="Go to slide 5: Examples">
+                <span class="nav-btn-number">5</span>
+                <span>Examples</span>
+                <span class="sr-only">- Project examples and lifecycle</span>
+            </button>
+            <button class="nav-btn" onclick="goToSlide(5)" aria-label="Go to slide 6: Implementation">
+                <span class="nav-btn-number">6</span>
+                <span>Implementation</span>
+                <span class="sr-only">- Strategy and phases</span>
+            </button>
+            <button class="nav-btn" onclick="goToSlide(6)" aria-label="Go to slide 7: Benefits and Challenges">
+                <span class="nav-btn-number">7</span>
+                <span>Benefits/Challenges</span>
+                <span class="sr-only">- Pros, cons, and success factors</span>
+            </button>
+            <button class="nav-btn" onclick="goToSlide(7)" aria-label="Go to slide 8: Next Steps">
+                <span class="nav-btn-number">8</span>
+                <span>Next Steps</span>
+                <span class="sr-only">- Implementation timeline and actions</span>
+            </button>
+        </div>
+
+        <div class="nav-controls">
+            <button class="nav-control-btn" id="prevBtn" onclick="previousSlide()">
+                <span>← Previous</span>
+            </button>
+            <button class="nav-control-btn" id="nextBtn" onclick="nextSlide()">
+                <span>Next →</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="slide-number">1/8</div>
+            <div class="logo">Webbly Media</div>
+            <h1>Hybrid Company Structure</h1>
+            <div class="subtitle">Combining Traditional Hierarchy with Matrix Organization</div>
+            <div class="structure-visual">
+                <div class="structure-box">
+                    <h4>Traditional Hierarchy</h4>
+                    <p>Clear reporting lines, departmental expertise, and structured management</p>
+                </div>
+                <div style="font-size: 3em; color: #3498db;">+</div>
+                <div class="structure-box">
+                    <h4>Matrix Structure</h4>
+                    <p>Cross-functional teams, project flexibility, and collaborative workflows</p>
+                </div>
+            </div>
+
+            <!-- Benefits of Hybrid Combination -->
+            <div class="hybrid-benefits">
+                <h3 style="color: var(--success-green); margin-bottom: 1.5rem;">🎯 Key Benefits of This Combination:</h3>
+                <div class="benefits-grid-title">
+                    <div class="benefit-item-title">
+                        <div class="benefit-icon">🚀</div>
+                        <h4>Enhanced Agility</h4>
+                        <p>Rapid response to market changes while maintaining operational stability</p>
+                    </div>
+                    <div class="benefit-item-title">
+                        <div class="benefit-icon">🤝</div>
+                        <h4>Improved Collaboration</h4>
+                        <p>Cross-functional teamwork without losing departmental expertise</p>
+                    </div>
+                    <div class="benefit-item-title">
+                        <div class="benefit-icon">⚖️</div>
+                        <h4>Balanced Structure</h4>
+                        <p>Combines accountability with flexibility for optimal performance</p>
+                    </div>
+                    <div class="benefit-item-title">
+                        <div class="benefit-icon">📈</div>
+                        <h4>Scalable Growth</h4>
+                        <p>Adapts to company expansion while preserving core organizational strengths</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Current Traditional Structure -->
+        <div class="slide">
+            <div class="slide-number">2/8</div>
+            <h2>Approached Traditional Hierarchy</h2>
+            <div class="company-structure-container">
+                <img src="Company Structure.png" alt="Current Traditional Hierarchy Structure" class="company-structure-image">
+            </div>
+
+            <div class="current-strengths">
+                <h3 style="color: var(--success-green); margin-bottom: 1.5rem;">✅ Strengths of Current Structure:</h3>
+                <div class="strengths-grid">
+                    <div class="strength-item">
+                        <div class="strength-icon">📊</div>
+                        <h4>Clear Accountability</h4>
+                        <p>Well-defined reporting relationships and responsibility chains</p>
+                    </div>
+                    <div class="strength-item">
+                        <div class="strength-icon">🎯</div>
+                        <h4>Specialized Expertise</h4>
+                        <p>Deep knowledge and skills within each functional area</p>
+                    </div>
+                    <div class="strength-item">
+                        <div class="strength-icon">⚡</div>
+                        <h4>Efficient Resource Allocation</h4>
+                        <p>Optimized distribution of resources by functional needs</p>
+                    </div>
+                    <div class="strength-item">
+                        <div class="strength-icon">🏆</div>
+                        <h4>Quality Standards</h4>
+                        <p>Consistent quality control within specialized departments</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Why Hybrid Structure -->
+        <div class="slide">
+            <div class="slide-number">3/8</div>
+            <h2>Why Hybrid Structure for Digital Agencies?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card" style="background: linear-gradient(135deg, var(--info-purple), var(--info-purple-dark));">
+                    <h3>🎯 Client Project Demands</h3>
+                    <p>Digital projects require multiple disciplines working together simultaneously - design, development, marketing, and content creation.</p>
+                    <div class="benefit-highlights">
+                        <span class="benefit-tag">✓ Faster delivery</span>
+                        <span class="benefit-tag">✓ Integrated solutions</span>
+                        <span class="benefit-tag">✓ Quality consistency</span>
+                    </div>
+                </div>
+                <div class="benefit-card" style="background: linear-gradient(135deg, var(--success-green), var(--success-green-dark));">
+                    <h3>⚡ Rapid Market Changes</h3>
+                    <p>Digital landscape evolves quickly. Teams need flexibility to adapt strategies and reallocate resources efficiently.</p>
+                    <div class="benefit-highlights">
+                        <span class="benefit-tag">✓ Market responsiveness</span>
+                        <span class="benefit-tag">✓ Resource agility</span>
+                        <span class="benefit-tag">✓ Competitive advantage</span>
+                    </div>
+                </div>
+                <div class="benefit-card" style="background: linear-gradient(135deg, var(--neutral-teal), var(--neutral-teal-dark));">
+                    <h3>💡 Cross-Functional Innovation</h3>
+                    <p>Best solutions emerge when different perspectives collaborate - UX insights informing SEO strategy, development limitations shaping design decisions.</p>
+                    <div class="benefit-highlights">
+                        <span class="benefit-tag">✓ Creative synergy</span>
+                        <span class="benefit-tag">✓ Knowledge sharing</span>
+                        <span class="benefit-tag">✓ Innovation boost</span>
+                    </div>
+                </div>
+                <div class="benefit-card" style="background: linear-gradient(135deg, var(--warning-orange), var(--warning-orange-dark));">
+                    <h3>📊 Resource Optimization</h3>
+                    <p>Balance workloads across departments while maintaining specialized expertise and career development paths.</p>
+                    <div class="benefit-highlights">
+                        <span class="benefit-tag">✓ Cost efficiency</span>
+                        <span class="benefit-tag">✓ Skill development</span>
+                        <span class="benefit-tag">✓ Utilization boost</span>
+                    </div>
+                </div>
+            </div>
+            <div class="key-metrics">
+                <h3 style="color: var(--primary-blue); margin-bottom: 1rem;">📈 Expected Impact for Webbly Media:</h3>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <span class="metric-value">25%</span>
+                        <span class="metric-label">Faster Project Delivery</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-value">40%</span>
+                        <span class="metric-label">Improved Resource Utilization</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-value">60%</span>
+                        <span class="metric-label">Enhanced Cross-Team Collaboration</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-value">30%</span>
+                        <span class="metric-label">Increased Client Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Hybrid Model Overview -->
+        <div class="slide">
+            <div class="slide-number">4/8</div>
+            <h2>Webbly Media Hybrid Model</h2>
+            <div class="structure-visual">
+                <div class="structure-box" style="background: linear-gradient(135deg, var(--success-green), var(--success-green-dark));">
+                    <h4>🏢 Functional Departments</h4>
+                    <p><strong>Permanent Structure</strong></p>
+                    <p>• Systems Administration</p>
+                    <p>• Marketing Management</p>
+                    <p>• Content Creation</p>
+                    <p>• Team Leaders & Specialists</p>
+                    <div class="benefit-highlights" style="margin-top: 1rem;">
+                        <span class="benefit-tag">Expertise Focus</span>
+                        <span class="benefit-tag">Career Growth</span>
+                        <span class="benefit-tag">Quality Standards</span>
+                    </div>
+                </div>
+                <div class="structure-box" style="background: linear-gradient(135deg, var(--info-purple), var(--info-purple-dark));">
+                    <h4>🚀 Project Teams</h4>
+                    <p><strong>Temporary Structure</strong></p>
+                    <p>• Cross-functional teams</p>
+                    <p>• Client-specific projects</p>
+                    <p>• Campaign-based groups</p>
+                    <p>• Innovation initiatives</p>
+                    <div class="benefit-highlights" style="margin-top: 1rem;">
+                        <span class="benefit-tag">Flexibility</span>
+                        <span class="benefit-tag">Innovation</span>
+                        <span class="benefit-tag">Client Focus</span>
+                    </div>
+                </div>
+            </div>
+            <div class="dual-reporting-system">
+                <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem;">🔄 Dual Reporting System:</h3>
+                <div class="reporting-grid">
+                    <div class="reporting-card" style="background: linear-gradient(135deg, var(--success-green-light), var(--success-green));">
+                        <h4>👨‍💼 Functional Manager</h4>
+                        <ul>
+                            <li>Career development & mentoring</li>
+                            <li>Skill building & training</li>
+                            <li>Performance reviews</li>
+                            <li>Departmental standards</li>
+                            <li>Resource planning</li>
+                        </ul>
+                        <div class="benefit-highlights">
+                            <span class="benefit-tag">Long-term Growth</span>
+                            <span class="benefit-tag">Expertise Building</span>
+                        </div>
+                    </div>
+                    <div class="reporting-card" style="background: linear-gradient(135deg, var(--info-purple-light), var(--info-purple));">
+                        <h4>🎯 Project Manager</h4>
+                        <ul>
+                            <li>Project deliverables & timelines</li>
+                            <li>Client requirements & communication</li>
+                            <li>Day-to-day work coordination</li>
+                            <li>Resource allocation</li>
+                            <li>Quality assurance</li>
+                        </ul>
+                        <div class="benefit-highlights">
+                            <span class="benefit-tag">Results Focus</span>
+                            <span class="benefit-tag">Client Success</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Matrix Project Examples -->
+        <div class="slide">
+            <div class="slide-number">5/8</div>
+            <h2>Matrix Project Examples</h2>
+            <div class="matrix-visual">
+                <div class="matrix-card" style="background: linear-gradient(135deg, var(--info-purple), var(--info-purple-dark));">
+                    <h4>🛒 E-commerce Launch</h4>
+                    <p><strong>Team Members:</strong></p>
+                    <p>• UI/UX Designer</p>
+                    <p>• Frontend Developer</p>
+                    <p>• Backend Developer</p>
+                    <p>• SEO Specialist</p>
+                    <p>• Graphics Designer</p>
+                    <div class="project-benefits">
+                        <h5>Key Benefits:</h5>
+                        <div class="benefit-tags-container">
+                            <span class="benefit-tag">Integrated UX</span>
+                            <span class="benefit-tag">SEO-Optimized</span>
+                            <span class="benefit-tag">Performance Focus</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="matrix-card" style="background: linear-gradient(135deg, var(--success-green), var(--success-green-dark));">
+                    <h4>📱 Social Media Campaign</h4>
+                    <p><strong>Team Members:</strong></p>
+                    <p>• Meta Marketing Lead</p>
+                    <p>• Video Creator</p>
+                    <p>• Graphics Designer</p>
+                    <p>• Content Writer</p>
+                    <p>• Google Ads Specialist</p>
+                    <div class="project-benefits">
+                        <h5>Key Benefits:</h5>
+                        <div class="benefit-tags-container">
+                            <span class="benefit-tag">Multi-Platform</span>
+                            <span class="benefit-tag">Consistent Branding</span>
+                            <span class="benefit-tag">ROI Tracking</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="matrix-card" style="background: linear-gradient(135deg, var(--neutral-teal), var(--neutral-teal-dark));">
+                    <h4>🎨 Website Redesign</h4>
+                    <p><strong>Team Members:</strong></p>
+                    <p>• UI/UX Leader</p>
+                    <p>• Frontend Team Lead</p>
+                    <p>• SEO/AEO Specialist</p>
+                    <p>• Content Creator</p>
+                    <p>• Systems Admin</p>
+                    <div class="project-benefits">
+                        <h5>Key Benefits:</h5>
+                        <div class="benefit-tags-container">
+                            <span class="benefit-tag">User-Centered</span>
+                            <span class="benefit-tag">Search Optimized</span>
+                            <span class="benefit-tag">Scalable Architecture</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-lifecycle">
+                <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem;">🔄 Project Lifecycle:</h3>
+                <div class="lifecycle-steps">
+                    <div class="lifecycle-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Project Initiation</h4>
+                            <p>Project manager assembles cross-functional team based on project requirements</p>
+                            <div class="step-benefits">
+                                <span class="benefit-tag">Right Skills</span>
+                                <span class="benefit-tag">Clear Goals</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lifecycle-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Resource Allocation</h4>
+                            <p>Functional managers release team members for project work with defined timelines</p>
+                            <div class="step-benefits">
+                                <span class="benefit-tag">Resource Balance</span>
+                                <span class="benefit-tag">Skill Sharing</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lifecycle-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Execution</h4>
+                            <p>Dual reporting ensures both project success and continuous skill development</p>
+                            <div class="step-benefits">
+                                <span class="benefit-tag">Quality Delivery</span>
+                                <span class="benefit-tag">Learning Growth</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lifecycle-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Project Closure</h4>
+                            <p>Team members return to functional departments with enhanced experience and skills</p>
+                            <div class="step-benefits">
+                                <span class="benefit-tag">Knowledge Transfer</span>
+                                <span class="benefit-tag">Career Growth</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Implementation Strategy -->
+        <div class="slide">
+            <div class="slide-number">6/8</div>
+            <h2>Implementation Strategy</h2>
+            <h3>Phase 1: Foundation (Months 1-2)</h3>
+            <ul>
+                <li>Define project management roles and responsibilities</li>
+                <li>Establish communication protocols between functional and project managers</li>
+                <li>Create resource allocation guidelines</li>
+                <li>Train team leaders on matrix management principles</li>
+            </ul>
+            
+            <h3>Phase 2: Pilot Projects (Months 3-4)</h3>
+            <ul>
+                <li>Launch 2-3 pilot projects using matrix structure</li>
+                <li>Implement project tracking and communication tools</li>
+                <li>Establish regular check-ins between dual managers</li>
+                <li>Gather feedback from team members</li>
+            </ul>
+            
+            <h3>Phase 3: Full Implementation (Months 5-6)</h3>
+            <ul>
+                <li>Scale successful practices across all projects</li>
+                <li>Refine processes based on pilot feedback</li>
+                <li>Implement performance evaluation system for matrix roles</li>
+                <li>Establish conflict resolution procedures</li>
+            </ul>
+        </div>
+
+        <!-- Slide 7: Benefits and Challenges -->
+        <div class="slide">
+            <div class="slide-number">7/8</div>
+            <h2>Benefits and Challenges</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card" style="background: linear-gradient(135deg, var(--success-green), var(--success-green-dark));">
+                    <h3>✅ Strategic Benefits</h3>
+                    <ul style="text-align: left;">
+                        <li>Enhanced collaboration across departments</li>
+                        <li>Faster project delivery through parallel work</li>
+                        <li>Better resource utilization</li>
+                        <li>Increased employee skill development</li>
+                        <li>Improved client satisfaction through integrated solutions</li>
+                        <li>Greater organizational agility</li>
+                    </ul>
+                    <div class="benefit-highlights" style="margin-top: 1rem;">
+                        <span class="benefit-tag">25% Faster Delivery</span>
+                        <span class="benefit-tag">40% Better Utilization</span>
+                        <span class="benefit-tag">60% More Collaboration</span>
+                    </div>
+                </div>
+                <div class="benefit-card" style="background: linear-gradient(135deg, var(--warning-orange), var(--warning-orange-dark));">
+                    <h3>⚠️ Potential Challenges</h3>
+                    <ul style="text-align: left;">
+                        <li>Role confusion and conflicting priorities</li>
+                        <li>Increased complexity in management</li>
+                        <li>Communication overhead</li>
+                        <li>Power struggles between managers</li>
+                        <li>Difficulty in performance evaluation</li>
+                        <li>Initial resistance to change</li>
+                    </ul>
+                    <div class="benefit-highlights" style="margin-top: 1rem;">
+                        <span class="benefit-tag">Manageable Risks</span>
+                        <span class="benefit-tag">Training Required</span>
+                        <span class="benefit-tag">Change Management</span>
+                    </div>
+                </div>
+            </div>
+            <div class="success-factors">
+                <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem;">🎯 Success Factors:</h3>
+                <div class="factors-grid">
+                    <div class="factor-item">
+                        <div class="factor-icon">💬</div>
+                        <h4>Clear Communication</h4>
+                        <p>Establish transparent communication channels and regular check-ins between all stakeholders</p>
+                    </div>
+                    <div class="factor-item">
+                        <div class="factor-icon">📋</div>
+                        <h4>Defined Roles</h4>
+                        <p>Create detailed role descriptions and responsibility matrices to avoid confusion</p>
+                    </div>
+                    <div class="factor-item">
+                        <div class="factor-icon">👥</div>
+                        <h4>Leadership Support</h4>
+                        <p>Ensure strong commitment and active support from all management levels</p>
+                    </div>
+                    <div class="factor-item">
+                        <div class="factor-icon">🎓</div>
+                        <h4>Proper Training</h4>
+                        <p>Provide comprehensive training on matrix management principles and tools</p>
+                    </div>
+                    <div class="factor-item">
+                        <div class="factor-icon">🔄</div>
+                        <h4>Process Refinement</h4>
+                        <p>Implement regular review cycles and continuous improvement processes</p>
+                    </div>
+                    <div class="factor-item">
+                        <div class="factor-icon">📊</div>
+                        <h4>Performance Metrics</h4>
+                        <p>Develop clear KPIs and measurement systems for matrix effectiveness</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Next Steps -->
+        <div class="slide">
+            <div class="slide-number">8/8</div>
+            <h2>Next Steps for Webbly Media</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card" style="background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));">
+                    <h3>🎯 1. Leadership Alignment</h3>
+                    <p>Ensure administration and management levels are fully committed to the hybrid approach and understand their roles in making it successful.</p>
+                    <div class="benefit-highlights">
+                        <span class="benefit-tag">Executive Buy-in</span>
+                        <span class="benefit-tag">Clear Vision</span>
+                        <span class="benefit-tag">Resource Commitment</span>
+                    </div>
+                </div>
+                <div class="benefit-card" style="background: linear-gradient(135deg, var(--success-green), var(--success-green-dark));">
+                    <h3>🎓 2. Training Program</h3>
+                    <p>Develop comprehensive training for all team leaders on matrix management, conflict resolution, and dual reporting relationships.</p>
+                    <div class="benefit-highlights">
+                        <span class="benefit-tag">Skill Development</span>
+                        <span class="benefit-tag">Conflict Resolution</span>
+                        <span class="benefit-tag">Leadership Growth</span>
+                    </div>
+                </div>
+                <div class="benefit-card" style="background: linear-gradient(135deg, var(--info-purple), var(--info-purple-dark));">
+                    <h3>💻 3. Technology Infrastructure</h3>
+                    <p>Implement project management tools, communication platforms, and resource tracking systems to support the matrix structure.</p>
+                    <div class="benefit-highlights">
+                        <span class="benefit-tag">Digital Tools</span>
+                        <span class="benefit-tag">Real-time Tracking</span>
+                        <span class="benefit-tag">Seamless Communication</span>
+                    </div>
+                </div>
+                <div class="benefit-card" style="background: linear-gradient(135deg, var(--neutral-teal), var(--neutral-teal-dark));">
+                    <h3>🚀 4. Pilot Project Selection</h3>
+                    <p>Choose initial projects that are complex enough to demonstrate matrix benefits but manageable enough to ensure early success.</p>
+                    <div class="benefit-highlights">
+                        <span class="benefit-tag">Proof of Concept</span>
+                        <span class="benefit-tag">Risk Management</span>
+                        <span class="benefit-tag">Quick Wins</span>
+                    </div>
+                </div>
+            </div>
+            <div class="implementation-timeline">
+                <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem;">📅 Timeline for Implementation:</h3>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">Month 1-2</div>
+                        <div class="timeline-content">
+                            <h4>Foundation Phase</h4>
+                            <p>Leadership alignment, role definition, and initial training setup</p>
+                            <div class="timeline-benefits">
+                                <span class="benefit-tag">Strategic Planning</span>
+                                <span class="benefit-tag">Team Preparation</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">Month 3-4</div>
+                        <div class="timeline-content">
+                            <h4>Pilot Launch</h4>
+                            <p>Execute 2-3 pilot projects with selected teams and gather feedback</p>
+                            <div class="timeline-benefits">
+                                <span class="benefit-tag">Real-world Testing</span>
+                                <span class="benefit-tag">Learning & Adjustment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">Month 5-6</div>
+                        <div class="timeline-content">
+                            <h4>Full Implementation</h4>
+                            <p>Scale successful practices across all projects and refine processes</p>
+                            <div class="timeline-benefits">
+                                <span class="benefit-tag">Organization-wide Rollout</span>
+                                <span class="benefit-tag">Continuous Improvement</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2.5rem;">
+                <div class="logo" style="font-size: 2.5rem;">Webbly Media</div>
+                <p style="font-size: 1.125rem; color: #64748b; font-weight: 500;"><em>Building Tomorrow's Digital Solutions Today</em></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const navButtons = document.querySelectorAll('.sidebar-nav .nav-btn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function updateNavigationState() {
+            // Update previous/next button states
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slides.length - 1;
+        }
+
+        function goToSlide(slideIndex) {
+            if (slideIndex < 0 || slideIndex >= slides.length) return;
+
+            // Hide current slide
+            slides[currentSlide].classList.remove('active');
+            navButtons[currentSlide].classList.remove('active');
+
+            // Show new slide
+            currentSlide = slideIndex;
+            slides[currentSlide].classList.add('active');
+            navButtons[currentSlide].classList.add('active');
+
+            updateNavigationState();
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                goToSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                goToSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                goToSlide(slides.length - 1);
+            }
+        });
+
+        // Initialize navigation state
+        updateNavigationState();
+
+        // Add smooth transitions for better UX
+        slides.forEach(slide => {
+            slide.style.transition = 'opacity 0.5s ease-in-out';
+        });
+
+        // Add touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else {
+                    // Swipe right - previous slide
+                    previousSlide();
+                }
+            }
+        }
+    </script>
+
+    <!-- Navbar -->
+    <nav class="presentation-navbar" role="banner" aria-label="Presentation header">
+        <div>Designed by <span class="designer-name">Firoz Anam</span> - Senior Software Developer, <span class="company-name">Webbly Media</span></div>
+    </nav>
+</body>
+</html>
